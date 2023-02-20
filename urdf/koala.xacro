@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<robot name="koala" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+
+  <material name="silver">
+    <color rgba="0.700 0.700 0.700 1.000"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0.001 0.001 0.001 1.000"/>
+  </material>
+
+  <material name="red">
+    <color rgba="0.990 0.000 0.000 1.000"/>
+  </material>
+
+  <link name="base_link">
+  </link>
+
+  <link name="drone_frame">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://koala_description/meshes/koala_base_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <link name="arm_fwd">
+    <visual>
+      <origin xyz="0.23 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://koala_description/meshes/koala_arm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <link name="arm_bwd">
+    <visual>
+      <origin xyz="0.23 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://koala_description/meshes/koala_arm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+  </link>
+
+  <link name="depth_link">
+  </link>
+
+  <xacro:sensor_d435 parent="depth_link" use_nominal_extrinsics="true" add_plug="false" use_mesh="true">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:sensor_d435>
+
+  <joint name="frame_to_depth" type="fixed" >
+    <origin xyz="0.08 0.0 -0.13" rpy="0.0 0.95 0.0" />
+    <parent link="drone_frame" />
+    <child link="depth_link" />
+  </joint>
+
+
+  <joint name="base_to_frame" type="fixed" >
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    <parent link="base_link" />
+    <child link="drone_frame" />
+  </joint>
+
+  <joint name="arm_joint_fwd" type="fixed">
+    <origin xyz="0.23 0 0" rpy="0 0 0"/>
+    <parent link="drone_frame"/>
+    <child link="arm_fwd"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit effort="30" velocity="5.0" lower="-1.57" upper="1.57"/>
+  </joint>
+
+  <joint name="arm_joint_bwd" type="fixed">
+    <origin xyz="-0.23 0 0" rpy="0 0 0"/>
+    <parent link="drone_frame"/>
+    <child link="arm_bwd"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit effort="30" velocity="5.0" lower="-1.57" upper="1.57"/>
+  </joint>
+
+
+</robot>

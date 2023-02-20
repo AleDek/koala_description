@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<launch>
+   
+    <!-- Run Qground control station -->
+  <node pkg="koala_mavlink" type="QGroundControl.AppImage" name="QGround" output="screen"/>
+  <!-- Launch gazebo, px4 sitl and mavros -->
+  <include file="$(find px4)/launch/mavros_posix_sitl.launch" > 
+      <arg name="vehicle" value="koala" />
+  </include>
+  <!-- Launch fake optitrack listener to make px4 work with vision and not GPS -->
+  <node pkg="optitrack_listener" name="simu_optitrack_listener" type="simu_optitrack_listener" output="screen">
+    <param name="model_name" type="string" value="koala" />
+    <param name="output_topic_name" type="string" value="/mavros/vision_pose/pose"/>
+    <param name="output_ref_frame" type="string" value="enu" />
+    <param name="publish_odom_pose" value="true" />
+  </node>
+  <!-- Run robot state publisher to have tf and rviz -->
+  <include file="$(find koala_description)/launch/display.launch" > 
+  </include>
+
+</launch>
+
+
+
+
+
+
+
