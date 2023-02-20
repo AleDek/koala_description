@@ -1,0 +1,12 @@
+#!/bin/bash
+# enable access to xhost from the container
+xhost +
+
+# Run docker and open bash shell
+docker run -it --privileged \
+--env=LOCAL_USER_ID="$(id -u)" \
+-v ~/ros2_docker_ws/:/ros2_docker_ws/:rw \
+-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+-e DISPLAY=:0 \
+--network host \
+--name=ros2_px4 px4io/px4-dev-ros2-foxy:2022-07-31 bash
