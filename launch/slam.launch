@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<launch>
+    <arg name="use_odom_topic" default="true"/>
+
+    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="--delete_db_on_start">
+        <param name="frame_id"        type="string" value="base_link"/>
+        <param name="visual_odometry" type="string" value="false"/>
+
+        <remap from="rgb/image"       to="/depth_camera/depth_camera/image_raw"/>
+        <remap from="depth/image"     to="/depth_camera/depth/disparity"/>
+        <remap from="rgb/camera_info" to="/depth_camera/depth_camera/camera_info"/>
+        
+
+        <!-- robot_localization output --> 
+        <remap if="$(arg use_odom_topic)" from="odom"  to="/odometry/filtered"/>   
+        <!-- odom frame of robot_localization -->
+        <param unless="$(arg use_odom_topic)" name="odom_frame_id" type="string" value="odom"/> 
+        <param unless="$(arg use_odom_topic)" name="odom_tf_angular_variance" type="double" value="0.005"/>
+        <param unless="$(arg use_odom_topic)" name="odom_tf_linear_variance"  type="double" value="0.005"/> 
+        <param unless="$(arg use_odom_topic)" name="approx_sync" type="bool"  value="false"/>    
+    </node>
+
+</launch>
+
+
+

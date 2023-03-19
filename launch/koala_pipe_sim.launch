@@ -12,8 +12,11 @@
     <param name="model_name" type="string" value="koala" />
     <param name="output_topic_name" type="string" value="/mavros/vision_pose/pose"/>
     <param name="output_ref_frame" type="string" value="enu" />
-    <param name="publish_odom_pose" value="true" />
+    <param name="publish_odom_pose" value="true" /> 
   </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="map_odom_static" args="0 0 0 0 0 0 map odom 100" />
+
   <!-- Run robot state publisher to have tf and rviz -->
   <include file="$(find koala_description)/launch/display.launch" > 
   </include>

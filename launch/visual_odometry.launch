@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<launch>
+   
+  
+  <node pkg="rtabmap_ros" type="rgbd_odometry" name="visual_odometry" output="screen">
+    <remap from="rgb/image"       to="/depth_camera/depth_camera/image_raw"/>
+    <remap from="depth/image"     to="/depth_camera/depth/disparity"/>
+    <remap from="rgb/camera_info" to="/depth_camera/depth_camera/camera_info"/>
+    <remap from="odom" to="visual_odom"/>
+
+    <!--param name="frame_id"               type="string" value="camera_depth_optical_frame"/-->
+    <param name="frame_id"               type="string" value="base_link"/>
+    <param name="publish_tf"             type="bool"   value="true"/>
+    <param name="publish_null_when_lost" type="bool"   value="false"/>
+    <param name="approx_sync"            type="bool"   value="false"/> 
+    <param name="Odom/ResetCountdown"    type="string" value="1"/>
+  </node>
+
+</launch>
+
+
