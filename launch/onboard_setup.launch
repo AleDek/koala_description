@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<launch>
+   
+    <arg name="model" default="$(find koala_description)/urdf/koala.xacro"/>
+    <arg name="simulation" default="false"/>
+
+    <!-- load URDF for transforms-->
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model) is_simulation:=$(arg simulation)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    <!-- Launch mavros -->
+    <include file="$(find mavros)/launch/px4.launch" > 
+    </include>
+
+    <!--  This is given by rtabmap (TODO check)
+    <node pkg="tf" type="static_transform_publisher" name="map_odom_static" args="0 0 0 0 0 0 map odom 100" />
+    -->
+
+    <!-- Realsense cameras driver -->
+    <include file="$(find koala_description)/launch/custom_rs_d400_and_t265.launch" > 
+    </include>
+
+</launch>
+
+
+
+
+
+
+

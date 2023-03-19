@@ -29,7 +29,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: Image
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -120,7 +120,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        depth_link:
+        d400_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -129,7 +129,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        stereo_link:
+        t265_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -143,68 +143,86 @@ Visualization Manager:
       Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: false
+        All Enabled: true
         arm_bwd:
-          Value: false
+          Value: true
         arm_fwd:
-          Value: false
+          Value: true
         base_link:
-          Value: false
+          Value: true
+        base_link_frd:
+          Value: true
         camera_bottom_screw_frame:
-          Value: false
+          Value: true
         camera_color_frame:
-          Value: false
+          Value: true
         camera_color_optical_frame:
-          Value: false
+          Value: true
         camera_depth_frame:
-          Value: false
+          Value: true
         camera_depth_optical_frame:
-          Value: false
+          Value: true
         camera_infra1_frame:
-          Value: false
+          Value: true
         camera_infra1_optical_frame:
-          Value: false
+          Value: true
         camera_infra2_frame:
-          Value: false
+          Value: true
         camera_infra2_optical_frame:
-          Value: false
+          Value: true
         camera_link:
-          Value: false
-        depth_link:
+          Value: true
+        d400_link:
           Value: true
         drone_frame:
-          Value: false
-        stereo_link:
-          Value: false
+          Value: true
+        map:
+          Value: true
+        map_ned:
+          Value: true
+        odom:
+          Value: true
+        odom_ned:
+          Value: true
+        t265_link:
+          Value: true
       Marker Alpha: 1
-      Marker Scale: 0.10000000149011612
+      Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        base_link:
-          drone_frame:
-            arm_bwd:
-              {}
-            arm_fwd:
-              {}
-            depth_link:
-              camera_bottom_screw_frame:
-                camera_link:
-                  camera_color_frame:
-                    camera_color_optical_frame:
-                      {}
-                  camera_depth_frame:
-                    camera_depth_optical_frame:
-                      {}
-                  camera_infra1_frame:
-                    camera_infra1_optical_frame:
-                      {}
-                  camera_infra2_frame:
-                    camera_infra2_optical_frame:
-                      {}
-            stereo_link:
+        map:
+          map_ned:
+            {}
+          odom:
+            base_link:
+              base_link_frd:
+                {}
+              drone_frame:
+                arm_bwd:
+                  {}
+                arm_fwd:
+                  {}
+                d400_link:
+                  camera_bottom_screw_frame:
+                    camera_link:
+                      camera_color_frame:
+                        camera_color_optical_frame:
+                          {}
+                      camera_depth_frame:
+                        camera_depth_optical_frame:
+                          {}
+                      camera_infra1_frame:
+                        camera_infra1_optical_frame:
+                          {}
+                      camera_infra2_frame:
+                        camera_infra2_optical_frame:
+                          {}
+                t265_link:
+                  {}
+            odom_ned:
               {}
       Update Interval: 0
       Value: true
@@ -405,7 +423,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: base_link
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -429,7 +447,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.5925902128219604
+      Distance: 11.128826141357422
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -437,17 +455,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.011167176067829132
-        Y: -0.4251241981983185
-        Z: -0.11389061063528061
+        X: 0.09583444893360138
+        Y: -0.2501859664916992
+        Z: 0.9052191972732544
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.16539770364761353
+      Pitch: 0.5903976559638977
       Target Frame: <Fixed Frame>
-      Yaw: 4.480387210845947
+      Yaw: 4.720384120941162
     Saved: ~
 Window Geometry:
   Camera:

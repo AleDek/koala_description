@@ -1,7 +1,12 @@
 <?xml version="1.0" ?>
 <robot name="koala" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
 
+  <xacro:arg name="is_simulation" default="true" />
+
+  <xacro:if value="$(arg is_simulation)">
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+  </xacro:if>
+  
   <material name="silver">
     <color rgba="0.700 0.700 0.700 1.000"/>
   </material>
@@ -47,26 +52,28 @@
     </visual>
   </link>
 
-  <link name="depth_link">
+  <link name="d400_link">
   </link>
 
-  <xacro:sensor_d435 parent="depth_link" use_nominal_extrinsics="true" add_plug="false" use_mesh="true">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-  </xacro:sensor_d435>
+  <xacro:if value="$(arg is_simulation)">
+    <xacro:sensor_d435 parent="d400_link" use_nominal_extrinsics="true" add_plug="false" use_mesh="true">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:sensor_d435>
+  </xacro:if>
 
-  <link name="stereo_link">
+  <link name="t265_link">
   </link>
 
   <joint name="frame_to_depth" type="fixed" >
     <origin xyz="0.1085 0.0 -0.0734" rpy="0.0 1.221 0.0" />
     <parent link="drone_frame" />
-    <child link="depth_link" />
+    <child link="d400_link" />
   </joint>
 
   <joint name="frame_to_stereo" type="fixed" >
     <origin xyz="-0.485 0.0 -0.08" rpy="0.0 0.0 3.14" />
     <parent link="drone_frame" />
-    <child link="stereo_link" />
+    <child link="t265_link" />
   </joint>
 
 
