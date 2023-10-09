@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="model" default="$(find koala_description)/urdf/clamp_tool.xacro"/>
+  <arg name="simulation" default="true"/>
+  <arg name="rvizconfig" default="$(find koala_description)/conf/conf.rviz"/>
+
+  <param name="clamp_tool_robot_description" command="$(find xacro)/xacro $(arg model) is_simulation:=$(arg simulation)"/>
+
+  <node name="clamp_tool_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+    <remap from="robot_description" to="clamp_tool_robot_description" />
+    <remap from="joint_states" to="clamp_tool/joint_states" />
+  </node> 
+
+  <!-- call to gazebo_ros to spawn a URDF robot -->
+  <!-- <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+  args="-urdf -model fratomo_base -param mobile_robot_description"/>  -->
+
+
+
+  <node name="rviz" pkg="rviz" args="-d $(arg rvizconfig)" type="rviz" required="true"/>
+</launch>

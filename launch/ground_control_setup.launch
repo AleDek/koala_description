@@ -2,9 +2,13 @@
 <launch>
   
   <arg name="rvizconfig" default="$(find koala_description)/conf/conf.rviz"/>
+  <arg name="rqtconfig" default="$(find koala_description)/conf/koala_drone.perspective"/>
 
   <!-- run Rviz-->
   <node name="rviz" pkg="rviz" args="-d $(arg rvizconfig)" type="rviz" required="true"/>
+
+  <!-- run Rqt-->
+  <node name = "my_rqt_dashboard" pkg = "rqt_gui" type = "rqt_gui" respawn = "false" output = "screen" args = "--perspective-file $(arg rqtconfig)"/>
 
   
 </launch>

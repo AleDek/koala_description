@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<robot name="clamp_tool" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="is_simulation" default="true" />
+
+  <xacro:if value="$(arg is_simulation)">
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+  </xacro:if>
+  
+  <material name="silver">
+    <color rgba="0.700 0.700 0.700 1.000"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0.001 0.001 0.001 1.000"/>
+  </material>
+
+  <material name="red">
+    <color rgba="0.990 0.000 0.000 1.000"/>
+  </material>
+
+  <link name="base_link">
+  </link>
+
+  <!-- <link name="drone_frame">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://koala_description/meshes/koala_base_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link> -->
+
+  <link name="fwd_foot">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <box size="0.02 0.2 0.5" />
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <box size="0.02 0.2 0.5" />
+      </geometry>
+    </collision>
+    <inertial>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+     <mass value="0.1"/>
+     <inertia ixx="0.001"  ixy="0"  ixz="0" iyy="0.001" iyz="0" izz="0.001" />
+   </inertial>
+  </link>
+
+  <link name="bwd_foot">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <box size="0.02 0.2 0.5" />
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <box size="0.02 0.2 0.5" />
+      </geometry>
+    </collision>
+    <inertial>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+     <mass value="0.1"/>
+     <inertia ixx="0.001"  ixy="0"  ixz="0" iyy="0.001" iyz="0" izz="0.001" />
+   </inertial>
+  </link>
+
+
+
+  <!-- <joint name="base_to_frame" type="fixed" >
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    <parent link="base_link" />
+    <child link="drone_frame" />
+  </joint> -->
+
+  <joint name="base_to_fwd_foot" type="fixed" >
+    <origin xyz="0.5 0.0 -0.2" rpy="0.0 0.0 0.0" />
+    <parent link="base_link" />
+    <child link="fwd_foot" />
+  </joint>
+
+  <joint name="base_to_bwd_foot" type="fixed" >
+    <origin xyz="-0.5 0.0 -0.2" rpy="0.0 0.0 0.0" />
+    <parent link="base_link" />
+    <child link="bwd_foot" />
+  </joint>
+
+  
+
+
+</robot>

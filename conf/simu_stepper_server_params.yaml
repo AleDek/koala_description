@@ -1,0 +1,8 @@
+simu_stepper_server:
+  robot_name_gz: "koala"
+  clamp_sec_delay: 5.0
+  crawler_sec_delay: 4.0
+  lock_sec_delay: 1.5
+  cam_is_down: true
+  depth_tf_down: [0.110, 0.000, -0.040, 0.000, 1.222, 0.000] #downside params
+  depth_tf_up:   [0.110, 0.000, 0.040, 3.141, -1.918, 0.000] #up params

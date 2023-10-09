@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<launch>
+    <arg name="conf_upside" default="false"/>
+    <arg unless="$(arg conf_upside)" name="model_name" default="koala"/>
+    <arg if="$(arg conf_upside)" name="model_name" default="koala_upside"/>
+
+    <!-- simulation stepper server -->
+    <rosparam command="load" file="$(find koala_description)/conf/simu_stepper_server_params.yaml" />
+    <node pkg="koala_description" type="simu_stepper_server" name="simu_stepper_server" output="screen">
+        <param name="robot_name_gz" type="string" value="$(arg model_name)" /> 
+        <param if="$(arg conf_upside)" name="cam_is_down" type="bool" value="false" />
+        <param unless="$(arg conf_upside)" name="cam_is_down" type="bool" value="true" />  
+    </node>
+
+
+</launch>
+
+
+
+
+
+
+
