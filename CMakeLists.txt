@@ -17,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib
   actionlib_msgs
   koala_msgs
+  mavros_msgs
   std_msgs
   tf2
   tf2_ros
@@ -159,8 +160,11 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
-add_executable ( simu_stepper_server src/simu_stepper_action_server.cpp)
-target_link_libraries(simu_stepper_server ${catkin_LIBRARIES} boost_thread boost_chrono pthread)
+#add_executable ( simu_stepper_server src/simu_stepper_action_server.cpp)
+#target_link_libraries(simu_stepper_server ${catkin_LIBRARIES} boost_thread boost_chrono pthread)
+#
+#add_executable ( simu_rc_command src/simu_rc_command.cpp)
+#target_link_libraries(simu_rc_command ${catkin_LIBRARIES} boost_thread boost_chrono pthread)
 
-add_executable ( simu_rc_command src/simu_rc_command.cpp)
-target_link_libraries(simu_rc_command ${catkin_LIBRARIES} boost_thread boost_chrono pthread)
+add_executable ( mavlink_command_test src/mavlink_command_test.cpp)
+target_link_libraries(mavlink_command_test ${catkin_LIBRARIES} )
